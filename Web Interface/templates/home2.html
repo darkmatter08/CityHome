@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+		<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/0.2.0/annyang.min.js"></script>
+		<style>	</style>
+		<script>
+		$(document).ready(function(){
+			if (annyang) {
+		        // define functions:
+		        var forward = function () {
+	                $.get('fwd/');
+	            };
+	            var backward = function () {
+	            	$.get('bwd/');
+	            };
+	            var stop = function () {
+	            	$.get('stop/');
+	            };
+
+		        // Let's define a command.
+		        var commands = {
+		            'forward': forward,
+		            'couch': forward,
+		            'backward': backward,
+		            'table': backward,
+		            'stop': stop,
+		        };
+
+		        annyang.debug();
+
+		        // Initialize annyang with our commands
+		        annyang.init(commands);
+
+		        annyang.setLanguage('en');
+
+		        annyang.start();
+	    	}
+	    	$("#fwd").click(function(){
+				forward();
+			});
+			$("#stop").click(function(){
+				stop();
+			});
+			$("#bwd").click(function(){
+				backward();
+			});
+		});	
+		</script>
+	</head>
+	<body>
+		<h1>Voice Commands</h1>
+		<ul>
+			<li>Forward OR Couch</li>
+			<li>Backward OR Table</li>
+			<li>Stop</li>
+		</ul>
+		<table class='table'>
+			<tr>
+				<td><button type='button' class="btn btn-primary" id='bwd'>Backward</button></td>
+				<td><button type='button' class="btn btn-primary" id='stop'>Stop</button></td>
+				<td><button type='button' class="btn btn-primary" id='fwd'>Forward</button></td>
+			</tr>
+		</table>
+	</body>
+</html>
